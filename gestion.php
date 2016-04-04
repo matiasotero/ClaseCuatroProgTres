@@ -33,7 +33,13 @@ else
 		$auto=explode("[", $renglon);
 		$listaDeAutos[]=$auto;
 	}
-	var_dump($listaDeAutos);
+	//var_dump($listaDeAutos);
+	fclose($archivo);
+	$esta=false;
+	foreach ($listaDeAutos as $auto) 
+	{
+		echo $auto[0]."<br>";// el indice cero es la patente, el indice uno es la fecha
+	}
 }
 
 
