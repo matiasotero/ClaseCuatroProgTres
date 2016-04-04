@@ -26,11 +26,11 @@ if ($accion == "ingreso")
 }
 else
 {
-	fread("ticket.txt", "r");
+	$archivo=fopen("ticket.txt", "r");
 	while (!feof($archivo))
 	{
 		$renglon=fgets($archivo);
-		$autp=explode("[", $renglon);
+		$auto=explode("[", $renglon);
 		$listaDeAutos[]=$auto;
 	}
 	var_dump($listaDeAutos);
