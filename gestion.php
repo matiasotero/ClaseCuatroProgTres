@@ -16,12 +16,24 @@
 $accion = $_POST["estacionar"];
 $patente = $_POST["patente"];
 $ahora=date("y-m-d h:i:s");
+$listaDeAutos=array();
 if ($accion == "ingreso") 
 {	
 	echo "Se guardo la patente ".$patente;
 	$archivo=fopen("ticket.txt", "a");
 	fwrite($archivo, $patente."[".$ahora."\n");//el corchete es separador
 	fclose($archivo);
+}
+else
+{
+	fread("ticket.txt", "r");
+	while (!feof($archivo))
+	{
+		$renglon=fgets($archivo);
+		$autp=explode("[", $renglon);
+		$listaDeAutos[]=$auto;
+	}
+	var_dump($listaDeAutos);
 }
 
 
