@@ -27,19 +27,26 @@ if ($accion == "ingreso")
 else
 {
 	$archivo=fopen("ticket.txt", "r");
-	while (!feof($archivo))
+	while (!feof($archivo))//La función feof devuelve true si es el final de la fila del archivo
 	{
 		$renglon=fgets($archivo);
 		$auto=explode("[", $renglon);
-		$listaDeAutos[]=$auto;
+		if($auto[0] != "")//esto sirve para que no se guarde un elemento vacio
+			$listaDeAutos[]=$auto;
 	}
 	//var_dump($listaDeAutos);
 	fclose($archivo);
 	$esta=false;
 	foreach ($listaDeAutos as $auto) 
 	{
-		echo $auto[0]."<br>";// el indice cero es la patente, el indice uno es la fecha
+		if($auto[0]==$patente)
+			$esta=true;
+		//echo $auto[0]."<br>";// el indice cero es la patente, el indice uno es la fecha
 	}
+		if($esta)
+			echo "El auto esta";
+		else
+			echo "No esta el auto";
 }
 
 
