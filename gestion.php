@@ -40,11 +40,16 @@ else
 	foreach ($listaDeAutos as $auto) 
 	{
 		if($auto[0]==$patente)
+		{
 			$esta=true;
+			$fechaInicio=$auto[1];
+			$fechaDiferencia=strtotime($ahora)-strtotime($fechaInicio);//strtotime() tranforma de string a dato tipo date o fecha
+			echo "El tiempo transcurrido es: ".$fechaDiferencia;
+		}
 		//echo $auto[0]."<br>";// el indice cero es la patente, el indice uno es la fecha
 	}
 		if($esta)
-			echo "El auto esta";
+			echo "<br>"."El auto esta"."<br>";
 		else
 			echo "No esta el auto";
 }
