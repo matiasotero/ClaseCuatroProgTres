@@ -17,11 +17,12 @@ $accion = $_POST["estacionar"];
 $patente = $_POST["patente"];
 $ahora=date("y-m-d h:i:s");
 $listaDeAutos=array();
+$listaAuxiliar=array();
 if ($accion == "ingreso") 
 {	
 	echo "Se guardo la patente ".$patente;
 	$archivo=fopen("ticket.txt", "a");
-	fwrite($archivo, $patente."[".$ahora."\n");//el corchete es separador
+	fwrite($archivo, $patente."[".$ahora."\n");//el corchete es separador//si el escape "\n" no funciona, probar PHP_EOL
 	fclose($archivo);
 }
 else
@@ -46,10 +47,23 @@ else
 			$fechaDiferencia=strtotime($ahora)-strtotime($fechaInicio);//strtotime() tranforma de string a dato tipo date o fecha
 			echo "El tiempo transcurrido es: ".$fechaDiferencia;
 		}
+		else
+		{
+			if($auto[0]!="")
+				$listaAuxiliar[]=$auto;
+		}
 		//echo $auto[0]."<br>";// el indice cero es la patente, el indice uno es la fecha
 	}
 		if($esta)
+		{
 			echo "<br>"."El auto esta"."<br>";
+			$archivoDos=fopen("ticket.txt", "w");
+			foreach ($listaAuxiliar as $auto) 
+			{
+				fwrite($archivoDos, $auto[0]."[".$auto[1]."\n");
+			}
+			fclose($archivoDos);
+		}
 		else
 			echo "No esta el auto";
 }
